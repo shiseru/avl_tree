@@ -7,7 +7,35 @@ class TreeNode:
 
 class AVLTree:
     def insert(self, root, key):
-        pass
+        # normal BST search tree
+        if not root:
+            return TreeNode(key)
+        elif key < root.val:
+            root.left = self.insert(root.left, key)
+        else:
+            root.right = self.insert(root.right, key)
+
+        # update the height of the tree
+        root.height = 1 + max(self.get_height(root.left), self.get_height(root.left))
+        balance = self.get_balance(root)
+
+        # Todo if balance is higher or less than 1 then rotate
+
+        # Left left?
+        if balance > 1 and key < root.left.val:
+            pass
+
+        # right right ?
+        if balance < -1 and key > root.right.val:
+            pass
+
+        # left right
+        if balance > 1 and key > root.left.val:
+            pass
+
+        # right left
+        if balance < -1 and key < root.right.val:
+            pass
 
     def left_rotate(self, z):
         pass
@@ -16,10 +44,16 @@ class AVLTree:
         pass
 
     def get_height(self, root):
-        pass
+        if root is None:
+            return 0
+
+        return root.height
 
     def get_balance(self, root):
-        pass
+        if root is None:
+            return 0
+
+        return self.get_height(root.left) - self.get_height(root.right)
 
     def pre_order(self, root):
         pass
